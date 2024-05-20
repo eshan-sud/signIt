@@ -1,24 +1,28 @@
-canvas {
-    -webkit-touch-callout: none;
-    touch-action: none;
+::selection {
+    background-color: black;
+    color: white;
 }
-#download-options {
-    width: 171px;
-    height: 23.33px;
-    padding: 0;
-}
+.hidden {display: none;}
+
 #drawing-board {
-    padding: 0px;
-    border: 2px solid black;
+    /* -webkit-touch-callout: none;
+    touch-action: none; */
+
+    padding: 50px;
+    margin: auto;
     display: block;
+    border: 1px solid black;
     width: auto;
-    height: auto;
+    height: auto;    
 }
-#clear-button, #download-button, a {
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: bold;
-    color: black;
-    width: 111px;
-    height: 28.67px;
+#drawing-board:hover {
+    border: 2px solid black;
+    /* cursor: pointer; */
+}
+
+svg {
+    cursor: pointer;
+    padding: 2px;
+    width: 50px;
+    height: 50px;
 }
