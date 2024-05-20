@@ -1,84 +1,24 @@
-html{
-    padding:0px;
-    margin:0px;
-    height:100%;
-    font-size:20px;
-}
-body{padding:10px;}
-
-
 canvas {
-    -webkit-touch-callout:none;
-    touch-action:none;
+    -webkit-touch-callout: none;
+    touch-action: none;
 }
-
-
-
-#toolbar-settings, #download-settings{
-    padding:15px 0px 15px 0px;
+#download-options {
+    width: 171px;
+    height: 23.33px;
+    padding: 0;
 }
-#label{
-    width:200px;
+#drawing-board {
+    padding: 0px;
+    border: 2px solid black;
+    display: block;
+    width: auto;
+    height: auto;
 }
-
-#stroke-color, #background-color{
-    width:171px;
-    height:23.33px;
-    padding:0;
-    border-width:0px;
-}
-#download-options{
-    width:171px;
-    height:23.33px;
-    padding:0;
-}
-#drawing-board{
-    padding:0px;
-    border:2px solid black;
-    
-    display:block;
-    width:auto;
-    height:auto;
-}
-#clear-button, #download-button, a{
-    text-decoration:none;
-    font-size:20px;
-    font-weight:bold;
-    color:black;
-    width:111px;
-    height:28.67px;
-}
-
-
-
-
-
-
-
-
-
-/*
-
-
-*/
-
-#my-links{
-    display:flex;
-    flex-direction:column;
-    margin-top:50px;
-    border:2px solid black;
-    padding:20px;
-}
-.links{
-    font-size:20px;
-    color:gray;
-}
-.links:hover{
-    color:black;
-}
-#copyrighted{
-    text-align:center;
-    justify-content:center;
-    margin:25px 0px 5px 0px;
-    font-size:15px;
+#clear-button, #download-button, a {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    width: 111px;
+    height: 28.67px;
 }
