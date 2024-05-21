@@ -50,10 +50,14 @@ function clearBackground() {
 }
 // Resizes the Canvas
 function resize() {
-    drawingContext.canvas.width = 750;
-    drawingContext.canvas.height = 250;
-    backgroundContext.canvas.width = 750;
-    backgroundContext.canvas.height = 250;
+    const container = document.getElementById('canvas-container');
+    const padding = parseFloat(window.getComputedStyle(container).paddingLeft);
+    const width = container.clientWidth - (2 * padding);
+    const height = container.clientHeight - (2 * padding);
+    drawingContext.canvas.width = width;
+    drawingContext.canvas.height = height;
+    backgroundContext.canvas.width = width;
+    backgroundContext.canvas.height = height;
     updateToolbarSettings();
 }
 // Gets the position of the Cursor

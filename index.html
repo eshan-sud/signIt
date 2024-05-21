@@ -14,18 +14,23 @@
             background-color: black;
             color: white;
         }
-        .canvas-container {
+        #canvas-container {
             position: relative;
             display: flex;
             width: 100%;
             min-height: 300px;
             border: 1px solid black;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        .canvas-container:hover {border: 2px solid black;}
-        #background-board, #drawing-board {
+        #canvas-container:hover {border: 2px solid black;}
+        .board {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            top: 20px;
+            left: 20px;
+            width: calc(100% - 40px);
+            height: calc(100% - 40px);
+            border-radius: 10px;
         }
         #drawing-board:hover {cursor: pointer;}
     </style>
@@ -67,7 +72,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 text-center m-mb-3 p-4">
                     <h3> Download Settings </h3>
-                    <select title="Download Options" class="w-75 form-control-lg " id="download-options" name="download-options">
+                    <select title="Download Options" class="w-75 form-control-lg" id="download-options" name="download-options">
                         <option value="png" selected> png </option>
                         <option value="jpg"> jpg </option>
                         <option value="pdf"> pdf </option>
@@ -76,9 +81,9 @@
             </div>
         </div>
         <hr class="border-4 border-black">
-        <div class="canvas-container rounded-5 mt-4 mx-auto d-block shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-            <canvas id="background-board" class="m-auto rounded-5 p-3"></canvas>
-            <canvas id="drawing-board" class="m-auto rounded-5 p-3"></canvas>
+        <div id="canvas-container" class="rounded-5 mt-4 d-block shadow-lg p-5">
+            <canvas class="board" id="background-board" class="rounded-5"></canvas>
+            <canvas class="board" id="drawing-board" class="rounded-5"></canvas>
         </div>
         <div class="text-center mt-2 pb-5">
             <button id="download-button" class="btn btn-lg btn-success fw-bold" style="border: none; padding: none;" onclick="save()"> Download </button>
