@@ -50,10 +50,10 @@ function clearBackground() {
 }
 // Resizes the Canvas
 function resize() {
-    const container = document.getElementById('canvas-container');
-    const padding = parseFloat(window.getComputedStyle(container).paddingLeft);
-    const width = container.clientWidth - (2 * padding);
-    const height = container.clientHeight - (2 * padding);
+    let container = document.getElementById('canvas-container');
+    let padding = parseFloat(window.getComputedStyle(container).paddingLeft);
+    let width = container.clientWidth - (2 * padding);
+    let height = container.clientHeight - (2 * padding);
     drawingContext.canvas.width = width;
     drawingContext.canvas.height = height;
     backgroundContext.canvas.width = width;
@@ -61,20 +61,17 @@ function resize() {
     updateToolbarSettings();
 }
 // Gets the position of the Cursor
-function getPosition(event) {
-    const rect = drawingBoard.getBoundingClientRect();
+function getPosition(event, attribute="default") {
+    let rect = drawingBoard.getBoundingClientRect();
     const scaleX = drawingBoard.width / rect.width;
     const scaleY = drawingBoard.height / rect.height;
-    coords.x = (event.clientX - rect.left) * scaleX;
-    coords.y = (event.clientY - rect.top) * scaleY;
-}
-// Gets the position of the Touch
-function getTouchPosition(event) {
-    const rect = drawingBoard.getBoundingClientRect();
-    const scaleX = drawingBoard.width / rect.width;
-    const scaleY = drawingBoard.height / rect.height;
-    coords.x = (event.touches[0].clientX - rect.left) * scaleX;
-    coords.y = (event.touches[0].clientY - rect.top) * scaleY;
+    if (attribute === "default") {
+        coords.x = (event.clientX - rect.left) * scaleX;
+        coords.y = (event.clientY - rect.top) * scaleY;
+    } else {
+        coords.x = (event.touches[0].clientX - rect.left) * scaleX;
+        coords.y = (event.touches[0].clientY - rect.top) * scaleY;
+    }
 }
 // Starts Painting
 function startPainting(event) {
@@ -85,7 +82,7 @@ function startTouchPainting(event) {
     if (event.target === drawingBoard) {
         event.preventDefault();
         paint = true;
-        getTouchPosition(event);
+        getPosition(event, "touch");
     }
 }
 // Sketchs the Drawing
@@ -109,14 +106,14 @@ function touchSketch(event) {
         drawingContext.lineWidth = strokeWidth;
         drawingContext.lineCap = "round";
         drawingContext.moveTo(coords.x, coords.y);
-        getTouchPosition(event);
+        getPosition(event, "touch");
         drawingContext.lineTo(coords.x, coords.y);
         drawingContext.stroke();
     }
 }
 // Stops Painting
 function stopPainting() {paint = false;}
-// Saves the Canvas
+// Saves the Canvas Image to Device
 function save() {
     let imageData;
     if (!backgroundColorSetting.checked) {
@@ -153,7 +150,7 @@ function saveImage(format) {
 }
 const { jsPDF } = window.jspdf;
 function savePDF() {
-    const imgData = drawingBoard.toDataURL("image/jpg", 1.0);
+    const image = drawingBoard.toDataURL("image/jpg", 1.0);
     const pdf = new jsPDF();
     const canvasWidth = drawingBoard.width;
     const canvasHeight = drawingBoard.height;
@@ -164,7 +161,7 @@ function savePDF() {
     const height = canvasHeight * ratio;
     const x = (pageWidth - width) / 2;
     const y = (pageHeight - height) / 2;
-    pdf.addImage(imgData, 'JPG', x, y, width, height);
+    pdf.addImage(image, 'JPG', x, y, width, height);
     pdf.save(`signature_${getTimestamp()}.pdf`);
 }
 function getTimestamp() {
