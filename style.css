@@ -17,7 +17,7 @@
 }
 #drawing-board:hover {
     border: 2px solid black;
-    /* cursor: pointer; */
+    cursor: pointer;
 }
 
 svg {

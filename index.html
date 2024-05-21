@@ -19,42 +19,46 @@
         <div id="logged-out">
             <div class="row">
                 <div class="dropdown col">
-                    <button type="button" class="btn btn-outline-success me-2 dropdown-toggle text-capitalize fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside"> Login </button>
+                    <button type="button" class="btn btn-outline-success me-2 dropdown-toggle fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside"> Login </button>
                     <form class="dropdown-menu dropdown-menu-end p-4 text-nowrap bg-body">
-                        <label class="text-dark pb-4 text-capitalize fw-bold">Have an account with us?</label>
+                        <label class="text-dark pb-4 fw-bold text-decoration-underline "> Have An Account With Us? </label>
                         <div class="mb-3">
-                            <label for="dropdown-login-email" class="form-label text-capitalize">Email address</label>
+                            <label for="dropdown-login-email" class="form-label fw-medium"> Email Address: </label>
                             <input type="email" class="form-control" id="dropdown-login-email" placeholder="email@example.com">
                         </div>
                         <div class="mb-3">
-                            <label for="dropdown-login-password" class="form-label text-capitalize">Password</label>
+                            <label for="dropdown-login-password" class="form-label fw-medium"> Password: </label>
                             <input type="password" class="form-control" id="dropdown-login-password" placeholder="Password">
                         </div>
                         <div class="mb-3">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="dropdown-check">
-                                <label class="form-check-label text-capitalize fw-medium" for="dropdown-check">Remember me</label>
+                                <label class="form-check-label fw-medium" for="dropdown-check"> Remember Me </label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary text-capitalize" id="dropdown-sign-in"> Sign in </button>
-                        <button type="reset" class="btn btn-secondary text-capitalize"> Reset </button>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary" id="dropdown-sign-in"> Sign In </button>
+                            <button type="reset" class="btn btn-secondary"> Reset </button>
+                        </div>
                     </form>
                 </div>
                 <div class="col-auto divider"></div>
                 <div class="dropdown col">
-                    <button type="button" class="btn btn-outline-danger me-2 dropdown-toggle text-capitalize fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside"> Sign up </button>
+                    <button type="button" class="btn btn-outline-danger me-2 dropdown-toggle fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside"> Sign Up </button>
                     <form class="dropdown-menu dropdown-menu-end p-4 text-nowrap bg-body">
-                        <label class="text-dark pb-4 text-capitalize fw-bold">Don't have an account with us?</label>
+                        <label class="text-dark pb-4 fw-bold text-decoration-underline"> Don't Have An Account With Us? </label>
                         <div class="mb-3">
-                            <label for="dropdown-signup-email" class="form-label text-capitalize">Email address</label>
+                            <label for="dropdown-signup-email" class="form-label fw-medium"> Email Address: </label>
                             <input type="email" class="form-control" id="dropdown-signup-email" placeholder="email@example.com">
                         </div>
                         <div class="mb-3">
-                            <label for="dropdown-signup-password" class="form-label text-capitalize">Password</label>
+                            <label for="dropdown-signup-password" class="form-label fw-medium"> Password: </label>
                             <input type="password" class="form-control" id="dropdown-signup-password" placeholder="Password">
                         </div>
-                        <button type="submit" class="btn btn-primary text-capitalize" id="dropdown-sign-up"> Sign up </button>
-                        <button type="reset" class="btn btn-secondary text-capitalize"> Reset </button>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary" id="dropdown-sign-up"> Sign up </button>
+                            <button type="reset" class="btn btn-secondary"> Reset </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -70,49 +74,48 @@
         </div>
         <div id="toolbar-settings" class="row mt-4 ">
             <div class="col bg-black p-3 rounded-5 bg-opacity-25 text-center m-md-2">
-                <h3 class="text-capitalize">stroke settings</h3>
+                <h3> Stroke Settings </h3>
                 <table class="w-100 mb-4">
                     <tr>
-                        <td><label for="stroke-color" class="text-capitalize fw-medium">stroke colour:</label></td>
+                        <td><label for="stroke-color" class="fw-medium"> Stroke Colour: </label></td>
                         <td><input id="stroke-color" class="form-control form-control-color" name="stroke-color" type="color"></td>
                     </tr>
                     <tr>
-                        <td><label for="stroke-width" class="text-capitalize fw-medium">stroke width:</label></td>
+                        <td><label for="stroke-width" class="fw-medium"> Stroke Width: </label></td>
                         <td><input id="stroke-width" class="form-control form-control-sm" name="stroke-width" type="number" value="5"></td>
                     </tr>
                 </table>
             </div>
             <div class="col bg-black p-3 rounded-5 bg-opacity-25 text-center m-md-2">
-                <h3 class="text-capitalize">background settings</h3>
+                <h3> Background Settings </h3>
                 <table class="w-100 mb-4">
                     <tr>
-                        <td><label for="background-check" class="text-capitalize fw-medium">transparent:</label></td>
+                        <td><label for="background-check" class="fw-medium"> Transparent: </label></td>
                         <td><input id="background-check" class="form-check form-check-input" name="background-check" type="checkbox" checked></td>
                     </tr>
                     <tr id="background-color-row" style="visibility: hidden;">
-                        <td><label for="background-color" class="text-capitalize fw-medium">background color:</label></td>
+                        <td><label for="background-color" class="fw-medium"> Background Color: </label></td>
                         <td><input id="background-color" class="form-control form-control-color" name="background-color" type="color"></td>
                     </tr>
                 </table>
             </div>
             <div class="col bg-black p-3 rounded-5 bg-opacity-25 text-center m-md-2">
-                <h3 class="text-capitalize">download settings</h3>
+                <h3> Download Settings </h3>
                 <select id="download-options" name="download-options" class="form-control-lg">
-                    <option value="png" selected>png</option>
-                    <option value="jpeg">jpeg</option>
-                    <option value="jpg">jpg</option>
-                    <option value="pdf">pdf</option>
+                    <option value="png" selected> png </option>
+                    <option value="jpg"> jpg </option>
+                    <option value="pdf"> pdf </option>
                 </select>
             </div>
         </div>
         <div class="mt-4"><canvas id="drawing-board"></canvas></div>
         <div class="text-center mt-4">
-            <button id="download-button" class="btn btn-primary" onclick="save()"><a href="#" class="text-dark text-capitalize link-underline fw-bold" download="Signature">Download</a></button>
-            <button class="btn btn-danger fw-bold" onclick="clearCanvas()">Clear</button>
+            <button id="download-button" class="btn btn btn-success fw-bold" style="border: none; padding: none;" onclick="save()"> Download </button>
+            <button class="btn btn-danger fw-bold" onclick="clearCanvas()"> Clear </button>
         </div>
     </main>
     <footer class="container-fluid text-center mt-5 pb-3 bg-info">
-		<h1 class="text-capitalize pt-3">Socials</h1>
+		<h1 class="pt-3">Contact Me</h1>
         <div class="m-4"><hr class="text-black"></div>
 		<div class="container text-center">
 			<a class="m-2" title="Instagram" href="https://www.instagram.com/eshan_sud/" target="_blank"><svg viewBox="0 0 24 24" style="fill: black;"><g><path d="M12,2.162c3.204,0,3.584,0.012,4.849,0.07c1.308,0.06,2.655,0.358,3.608,1.311c0.962,0.962,1.251,2.296,1.311,3.608   c0.058,1.265,0.07,1.645,0.07,4.849c0,3.204-0.012,3.584-0.07,4.849c-0.059,1.301-0.364,2.661-1.311,3.608 c-0.962,0.962-2.295,1.251-3.608,1.311c-1.265,0.058-1.645,0.07-4.849,0.07s-3.584-0.012-4.849-0.07 c-1.291-0.059-2.669-0.371-3.608-1.311c-0.957-0.957-1.251-2.304-1.311-3.608c-0.058-1.265-0.07-1.645-0.07-4.849   c0-3.204,0.012-3.584,0.07-4.849c0.059-1.296,0.367-2.664,1.311-3.608c0.96-0.96,2.299-1.251,3.608-1.311   C8.416,2.174,8.796,2.162,12,2.162 M12,0C8.741,0,8.332,0.014,7.052,0.072C5.197,0.157,3.355,0.673,2.014,2.014   C0.668,3.36,0.157,5.198,0.072,7.052C0.014,8.332,0,8.741,0,12c0,3.259,0.014,3.668,0.072,4.948c0.085,1.853,0.603,3.7,1.942,5.038   c1.345,1.345,3.186,1.857,5.038,1.942C8.332,23.986,8.741,24,12,24c3.259,0,3.668-0.014,4.948-0.072   c1.854-0.085,3.698-0.602,5.038-1.942c1.347-1.347,1.857-3.184,1.942-5.038C23.986,15.668,24,15.259,24,12   c0-3.259-0.014-3.668-0.072-4.948c-0.085-1.855-0.602-3.698-1.942-5.038c-1.343-1.343-3.189-1.858-5.038-1.942   C15.668,0.014,15.259,0,12,0z"></path><path d="M12,5.838c-3.403,0-6.162,2.759-6.162,6.162c0,3.403,2.759,6.162,6.162,6.162s6.162-2.759,6.162-6.162   C18.162,8.597,15.403,5.838,12,5.838z M12,16c-2.209,0-4-1.791-4-4s1.791-4,4-4s4,1.791,4,4S14.209,16,12,16z"></path></g></svg></a>
@@ -123,11 +126,10 @@
 		</div>
 		<div class="pt-3"><a class="text-dark-emphasis" href="mailto:eshansud22@gmail.com">eshansud22@gmail.com</a></div>
 		<div class="m-4"><hr class="text-black"></div>
-		<div class="container-fluid text-center"><p class="text-capitalize fw-bold">© 2024 eshan sud. all rights reserved.</p></div>
+		<div class="container-fluid text-center"><p class="fw-bold">© 2024 Eshan Sud. All Rights Reserved.</p></div>
 	</footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
