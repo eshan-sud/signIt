@@ -1,73 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Virtual Signature - Eshan Sud</title>
-        <link rel="icon" href="images/favicon.ico">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <header>
-            <h1>Make Your Virtual Signature</h1>
-            <p>
-                This website is a mini-project for creating your virtual signature on the go<br>
-                <em><strong>DISCLAIMER:</strong> This website does not keep any of its user's data<em></em>
-            </p>
-        </header>
-        <section id="main-content">
-            <canvas id="drawing-board"></canvas>
-            <div>
-                <div id="toolbar-settings">
-                    <h3>Stroke Settings</h3>
-                    <table id="stroke-settings">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Mini-Project for creating your own virtual or electronic signature wherever and whenever at your own convienience" />
+    <title>Create Your E-Sign - Eshan Sud</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./resources/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./resources/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./resources/favicon/favicon-16x16.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        ::selection {
+            background-color: black;
+            color: white;
+        }
+        .canvas-container {
+            position: relative;
+            display: flex;
+            width: 100%;
+            min-height: 300px;
+            border: 1px solid black;
+        }
+        .canvas-container:hover {border: 2px solid black;}
+        #background-board, #drawing-board {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        #drawing-board:hover {cursor: pointer;}
+    </style>
+</head>
+<body>
+    <nav class="navbar bg-danger shadow-lg p-3 mb-5 justify-content-center "><h1 class="fw-bold">Create Your Electronic Signature</h1></nav>
+    <main class="container mt-5">
+        <div id="toolbar-settings" class="w-100 bg-black rounded-5 bg-opacity-25 p-3">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-4 text-center m-mb-3 p-4">
+                    <h3> Stroke Settings </h3>
+                    <table class="w-100 mb-4">
                         <tr>
-                            <td><label for="stroke-color">Stroke Color:</label></td>
-                            <td><input id="stroke-color" name="stroke-color" type="color"></td>
+                            <td class="w-50"><label for="stroke-color" class="w-100 fw-medium"> Colour: </label></td>
+                            <td class="w-50"><input id="stroke-color" class="w-100 form-control form-control-color" name="stroke-color" type="color"></td>
                         </tr>
                         <tr>
-                            <td><label for="stroke-width">Stroke Width:</label></td>
-                            <td><input id="stroke-width" name="stroke-width" type="number" value="5"></td>
+                            <td class="w-50"><label for="stroke-width" class="w-100 fw-medium"> Width: </label></td>
+                            <td class="w-50"><input style="height: 38px; padding: 6px;" id="stroke-width" class="w-100 text-center size form-control form-control-sm" name="stroke-width" type="number" value="5"></td>
                         </tr>
                     </table>
-                    <h3>Background Settings</h3>
-                    <table id="background-settings">
+                </div>
+                <div class="col-lg-4 col-md-4 text-center m-mb-3 p-4">
+                    <h3> Background Settings </h3>
+                    <table class="w-100 mb-4">
                         <tr>
-                            <td><label for="background-check">Transparent Background:</label></td>
-                            <td><input id="background-check" name="background-check" type="checkbox" checked></td>
+                            <td class="w-50"><label for="background-check" class="w-100 fw-medium"> Transparent: </label></td>
+                            <td class="w-50"><input style="height: 38px; margin: 0px; padding: 6px" id="background-check" class="w-100 form-check form-check-input" name="background-check" type="checkbox" checked></td>
                         </tr>
-                        <tr id="background-color-row" style="display:none;">
-                            <td><label for="background-color">Background Color:</label></td>
-                            <td><input id="background-color" name="background-color" type="color"></td>
+                        <tr id="background-color-row" style="visibility: hidden;">
+                            <td class="w-50"><label for="background-color" class="w-100 fw-medium"> Colour: </label></td>
+                            <td class="w-50"><input id="background-color" class="w-100 form-control form-control-color" name="background-color" type="color" value="#ffffff"></td>
                         </tr>
                     </table>
-                    <button id="clear-button" onclick="reload()">
-                        <a href="">Clear</a></button>
-                    <div id="download-settings">
-                        <!-- <select name="download-options" id="download-options">
-                            <option value="jpeg">jpeg</option>
-                            <option value="jpg">jpg</option>
-                            <option value="png" selected>png</option>
-                            <option value="pdf">pdf</option>
-                        </select> -->
-                        <button onclick="save()">
-                            <a id="download-button" href="#" download="signature">Download</a>
-                        </button>
-                    </div>
                 </div>
-            </section>
-            <!-- <footer id="my-links">
-                <div id="link-websites">
-                    <h3>Link to my socials</h3>
-                    <a class="links" href="https://github.com/eshan-sud" target="_blank" class="footer-links">GitHub</a>
-                    <a class="links" href="https://www.linkedin.com/in/eshan-sud/" target="_blank" class="footer-links">Linkedin</a>
-                    <a class="links" href="https://www.hackerrank.com/profile/eshansud22" target="_blank" class="footer-links">HackerRank</a>
-                    <a class="links" href="https://leetcode.com/eshan_sud/" target="_blank" class="footer-links">LeetCode</a>
+                <div class="col-lg-4 col-md-4 text-center m-mb-3 p-4">
+                    <h3> Download Settings </h3>
+                    <select title="Download Options" class="w-75 form-control-lg " id="download-options" name="download-options">
+                        <option value="png" selected> png </option>
+                        <option value="jpg"> jpg </option>
+                        <option value="pdf"> pdf </option>
+                    </select>
                 </div>
-                <div id="copyrighted">
-                    &copy; 2024 Eshan Sud. All Rights Reserved.
-                </div>
-            </footer> -->
-        <script src="script.js"></script>
-    </body>
+            </div>
+        </div>
+        <hr class="border-4 border-black">
+        <div class="canvas-container rounded-5 mt-4 mx-auto d-block shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+            <canvas id="background-board" class="m-auto rounded-5 p-3"></canvas>
+            <canvas id="drawing-board" class="m-auto rounded-5 p-3"></canvas>
+        </div>
+        <div class="text-center mt-2 pb-5">
+            <button id="download-button" class="btn btn-lg btn-success fw-bold" style="border: none; padding: none;" onclick="save()"> Download </button>
+            <button class="btn btn-lg btn-danger fw-bold" onclick="clearCanvas()"> Clear </button>
+        </div>
+    </main>
+    <footer class="container-fluid text-center mt-5 pb-3 bg-danger text-black">
+		<h1 class="pt-3">Contact Me</h1>
+        <div class="m-4"><hr class="text-black"></div>
+		<div class="container text-center">
+			<a class="m-2" title="Instagram" href="https://www.instagram.com/eshan_sud/" target="_blank"><svg viewBox="0 0 24 24" style="cursor: pointer; padding: 2px; width: 50px; height: 50px; fill: black;"><g><path d="M12,2.162c3.204,0,3.584,0.012,4.849,0.07c1.308,0.06,2.655,0.358,3.608,1.311c0.962,0.962,1.251,2.296,1.311,3.608   c0.058,1.265,0.07,1.645,0.07,4.849c0,3.204-0.012,3.584-0.07,4.849c-0.059,1.301-0.364,2.661-1.311,3.608 c-0.962,0.962-2.295,1.251-3.608,1.311c-1.265,0.058-1.645,0.07-4.849,0.07s-3.584-0.012-4.849-0.07 c-1.291-0.059-2.669-0.371-3.608-1.311c-0.957-0.957-1.251-2.304-1.311-3.608c-0.058-1.265-0.07-1.645-0.07-4.849   c0-3.204,0.012-3.584,0.07-4.849c0.059-1.296,0.367-2.664,1.311-3.608c0.96-0.96,2.299-1.251,3.608-1.311   C8.416,2.174,8.796,2.162,12,2.162 M12,0C8.741,0,8.332,0.014,7.052,0.072C5.197,0.157,3.355,0.673,2.014,2.014   C0.668,3.36,0.157,5.198,0.072,7.052C0.014,8.332,0,8.741,0,12c0,3.259,0.014,3.668,0.072,4.948c0.085,1.853,0.603,3.7,1.942,5.038   c1.345,1.345,3.186,1.857,5.038,1.942C8.332,23.986,8.741,24,12,24c3.259,0,3.668-0.014,4.948-0.072   c1.854-0.085,3.698-0.602,5.038-1.942c1.347-1.347,1.857-3.184,1.942-5.038C23.986,15.668,24,15.259,24,12   c0-3.259-0.014-3.668-0.072-4.948c-0.085-1.855-0.602-3.698-1.942-5.038c-1.343-1.343-3.189-1.858-5.038-1.942   C15.668,0.014,15.259,0,12,0z"></path><path d="M12,5.838c-3.403,0-6.162,2.759-6.162,6.162c0,3.403,2.759,6.162,6.162,6.162s6.162-2.759,6.162-6.162   C18.162,8.597,15.403,5.838,12,5.838z M12,16c-2.209,0-4-1.791-4-4s1.791-4,4-4s4,1.791,4,4S14.209,16,12,16z"></path></g></svg></a>
+			<a class="m-2" title="GitHub" href="https://github.com/eshan-sud/" target="_blank"><svg viewBox="0 0 24 24" style="cursor: pointer; padding: 2px; width: 50px; height: 50px; fill: black;"><g><path d="M12,0.296c-6.627,0-12,5.372-12,12c0,5.302,3.438,9.8,8.206,11.387   c0.6,0.111,0.82-0.26,0.82-0.577c0-0.286-0.011-1.231-0.016-2.234c-3.338,0.726-4.043-1.416-4.043-1.416   C4.421,18.069,3.635,17.7,3.635,17.7c-1.089-0.745,0.082-0.729,0.082-0.729c1.205,0.085,1.839,1.237,1.839,1.237 c1.07,1.834,2.807,1.304,3.492,0.997C9.156,18.429,9.467,17.9,9.81,17.6c-2.665-0.303-5.467-1.332-5.467-5.93 c0-1.31,0.469-2.381,1.237-3.221C5.455,8.146,5.044,6.926,5.696,5.273c0,0,1.008-0.322,3.301,1.23   C9.954,6.237,10.98,6.104,12,6.099c1.02,0.005,2.047,0.138,3.006,0.404c2.29-1.553,3.297-1.23,3.297-1.23   c0.653,1.653,0.242,2.873,0.118,3.176c0.769,0.84,1.235,1.911,1.235,3.221c0,4.609-2.807,5.624-5.479,5.921   c0.43,0.372,0.814,1.103,0.814,2.222c0,1.606-0.014,2.898-0.014,3.293c0,0.319,0.216,0.694,0.824,0.576   c4.766-1.589,8.2-6.085,8.2-11.385C24,5.669,18.627,0.296,12,0.296z"></path><path d="M4.545,17.526c-0.026,0.06-0.12,0.078-0.206,0.037c-0.087-0.039-0.136-0.121-0.108-0.18   c0.026-0.061,0.12-0.078,0.207-0.037C4.525,17.384,4.575,17.466,4.545,17.526L4.545,17.526z"></path><path d="M5.031,18.068c-0.057,0.053-0.169,0.028-0.245-0.055c-0.079-0.084-0.093-0.196-0.035-0.249   c0.059-0.053,0.167-0.028,0.246,0.056C5.076,17.903,5.091,18.014,5.031,18.068L5.031,18.068z"></path><path d="M5.504,18.759c-0.074,0.051-0.194,0.003-0.268-0.103c-0.074-0.107-0.074-0.235,0.002-0.286 c0.074-0.051,0.193-0.005,0.268,0.101C5.579,18.579,5.579,18.707,5.504,18.759L5.504,18.759z"></path><path d="M6.152,19.427c-0.066,0.073-0.206,0.053-0.308-0.046c-0.105-0.097-0.134-0.234-0.068-0.307   c0.067-0.073,0.208-0.052,0.311,0.046C6.191,19.217,6.222,19.355,6.152,19.427L6.152,19.427z"></path><path d="M7.047,19.814c-0.029,0.094-0.164,0.137-0.3,0.097C6.611,19.87,6.522,19.76,6.55,19.665   c0.028-0.095,0.164-0.139,0.301-0.096C6.986,19.609,7.075,19.719,7.047,19.814L7.047,19.814z"></path><path d="M8.029,19.886c0.003,0.099-0.112,0.181-0.255,0.183c-0.143,0.003-0.26-0.077-0.261-0.174c0-0.1,0.113-0.181,0.256-0.184   C7.912,19.708,8.029,19.788,8.029,19.886L8.029,19.886z"></path><path d="M8.943,19.731c0.017,0.096-0.082,0.196-0.224,0.222c-0.139,0.026-0.268-0.034-0.286-0.13   c-0.017-0.099,0.084-0.198,0.223-0.224C8.797,19.574,8.925,19.632,8.943,19.731L8.943,19.731z"></path></g></svg></a>
+			<a class="m-2" title="linkedIn" href="https://www.linkedin.com/in/eshan-sud/" target="_blank"><svg viewBox="0 0 24 24" style="cursor: pointer; padding: 2px; width: 50px; height: 50px; fill: black;"><g><path d="M17.291,19.073h-3.007v-4.709c0-1.123-0.02-2.568-1.564-2.568c-1.566,0-1.806,1.223-1.806,2.487v4.79H7.908   V9.389h2.887v1.323h0.04c0.589-1.006,1.683-1.607,2.848-1.564c3.048,0,3.609,2.005,3.609,4.612L17.291,19.073z M4.515,8.065 c-0.964,0-1.745-0.781-1.745-1.745c0-0.964,0.781-1.745,1.745-1.745c0.964,0,1.745,0.781,1.745,1.745 C6.26,7.284,5.479,8.065,4.515,8.065L4.515,8.065 M6.018,19.073h-3.01V9.389h3.01V19.073z M18.79,1.783H1.497   C0.68,1.774,0.01,2.429,0,3.246V20.61c0.01,0.818,0.68,1.473,1.497,1.464H18.79c0.819,0.01,1.492-0.645,1.503-1.464V3.245   c-0.012-0.819-0.685-1.474-1.503-1.463"></path></g></svg></a>
+			<a class="m-2" title="HackerRank" href="https://www.hackerrank.com/profile/eshansud/" target="_blank"><svg viewBox="0 0 32 32" style="cursor: pointer; padding: 2px; width: 50px; height: 50px; fill: black;"><path d="M 15.998047 3 C 14.225047 3 5.5352031 7.9839062 4.6582031 9.5039062 C 3.7802031 11.024906 3.7802031 20.983047 4.6582031 22.498047 C 5.5392031 24.017047 14.229047 29 15.998047 29 C 17.762047 29 26.451938 24.019953 27.335938 22.501953 C 28.222938 20.979953 28.222938 11.014047 27.335938 9.4980469 L 27.335938 9.4960938 C 26.444937 7.9790937 17.756047 3 15.998047 3 z M 15.996094 5.0117188 C 17.693094 5.3647187 24.417703 9.2167656 25.595703 10.509766 C 26.135703 12.150766 26.134703 19.844281 25.595703 21.488281 C 24.425703 22.779281 17.695094 26.636281 15.996094 26.988281 C 14.298094 26.638281 7.5723906 22.783234 6.4003906 21.490234 C 5.8653906 19.842234 5.8653906 12.155766 6.4003906 10.509766 C 7.5693906 9.2167656 14.297094 5.3617187 15.996094 5.0117188 z M 13 9 L 11 11 L 12 11 L 12 21 L 14 21 L 14 17 L 18 17 L 18 21 L 17 21 L 19 23 L 21 21 L 20 21 L 20 12 L 18 12 L 18 15 L 14 15 L 14 11 L 15 11 L 13 9 z"></path></svg></a>
+			<a class="m-2" title="LeetCode" href="https://leetcode.com/eshan-sud/" target="_blank"><svg viewBox="0 0 26 26" style="cursor: pointer; padding: 2px; width: 50px; height: 50px; fill: black;"><path d="M22,14.355c0-0.742-0.564-1.346-1.26-1.346H10.676c-0.696,0-1.26,0.604-1.26,1.346s0.563,1.346,1.26,1.346H20.74C21.436,15.702,22,15.098,22,14.355z"></path><path d="M3.482,18.187l4.313,4.361C8.768,23.527,10.113,24,11.598,24c1.485,0,2.83-0.512,3.805-1.494l2.588-2.637c0.51-0.514,0.492-1.365-0.039-1.9c-0.531-0.535-1.375-0.553-1.884-0.039l-2.676,2.607c-0.462,0.467-1.102,0.662-1.809,0.662s-1.346-0.195-1.81-0.662l-4.298-4.363c-0.463-0.467-0.696-1.15-0.696-1.863c0-0.713,0.233-1.357,0.696-1.824l4.285-4.38c0.463-0.467,1.116-0.645,1.822-0.645s1.346,0.195,1.809,0.662l2.676,2.606c0.51,0.515,1.354,0.497,1.885-0.038c0.531-0.536,0.549-1.387,0.039-1.901l-2.588-2.636c-0.649-0.646-1.471-1.116-2.392-1.33l-0.034-0.007l2.447-2.503c0.512-0.514,0.494-1.366-0.037-1.901c-0.531-0.535-1.376-0.552-1.887-0.038L3.482,10.476C2.509,11.458,2,12.813,2,14.311C2,15.809,2.509,17.207,3.482,18.187z"></path></svg></a>
+		</div>
+		<div class="pt-3"><a class="text-dark-emphasis" href="mailto:eshansud22@gmail.com">eshansud22@gmail.com</a></div>
+		<div class="m-4"><hr class="text-black"></div>
+		<div class="container-fluid text-center"><p class="fw-bold">© 2024 Eshan Sud. All Rights Reserved.</p></div>
+	</footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
 </html>

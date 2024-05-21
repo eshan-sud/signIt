@@ -1,107 +1,175 @@
-
 window.addEventListener("load", () => {
     resize();
-    document.addEventListener("mousedown", startPainting);
-    document.addEventListener("mouseup", stopPainting);
-    document.addEventListener("mousemove", sketch);
     window.addEventListener("resize", resize);
-    const toolBar = document.getElementById("toolbar-settings");
-    toolBar.addEventListener("change", updateToolbarSettings);
-    document.getElementById("background-check").addEventListener("click", changeBackgroundTransparency);
-    document.getElementById("background-color").addEventListener("click", changeBackground);
+    document.addEventListener("mouseup", stopPainting);
+    document.addEventListener("mousedown", startPainting);
+    document.addEventListener("mousemove", sketch);
+    document.addEventListener("touchend", stopPainting);
+    document.addEventListener("touchstart", startTouchPainting, { passive: false });
+    document.addEventListener("touchmove", touchSketch, { passive: false });
+    backgroundColorSetting.addEventListener("click", changeBackgroundTransparency);
+    document.getElementById("toolbar-settings").addEventListener("change", updateToolbarSettings);
 });
-
 // Drawing Board
 const drawingBoard = document.getElementById("drawing-board");
-const context = drawingBoard.getContext("2d");
-let boardWidth = 100, boardHeight = 100;
-let strokeWidth = 0, strokeColor = "black";
-let coords = {x:0 , y:0};
+const backgroundBoard = document.getElementById("background-board");
+const drawingContext = drawingBoard.getContext("2d");
+const backgroundContext = backgroundBoard.getContext("2d");
+const backgroundColorSetting = document.getElementById("background-check");
+let backgroundColor = "white", strokeWidth = 5, strokeColor = "black";
+let coords = { x: 0, y: 0 };
 let paint = false;
-
-// Update TooBar
-function updateToolbarSettings(){
+// Update the Toolbar Settings
+function updateToolbarSettings() {
     strokeWidth = document.getElementById("stroke-width").value;
     strokeColor = document.getElementById("stroke-color").value;
-}
-
-// Download Image
-function save(){
-    // const documentSelection = document.getElementById("download-options").value;
-    // let selection = {
-    //     "png": "images/png",
-    //     "jpeg": "image/jpeg",
-    //     "jpg": "image/jpg",
-    //     "pdf": "images/pdf"
-    // };
-    // const pngDataURL = drawingBoard.toDataURL(selection["documentSelection"]);
-    const pngDataURL = drawingBoard.toDataURL("images/png");
-    let downloadButton = document.getElementById("download-button");
-    downloadButton.href = pngDataURL;
-}
-
-// Background Color Settings
-function changeBackgroundTransparency(){
-    backgroundRow = document.getElementById("background-color-row");
-    if (backgroundRow.style.display == "none"){
-        backgroundRow.style.display = "block";
+    backgroundColor = document.getElementById("background-color").value;
+    if (backgroundColorSetting.checked) {
+        clearBackground();
         return;
     }
-    backgroundRow.style.display = "none";
+    backgroundContext.fillStyle = backgroundColor;
+    backgroundContext.fillRect(0, 0, drawingBoard.width, drawingBoard.height);
 }
-function changeBackground(){
-    let color = document.getElementById("background-color").value;
-    context.save();
-    context.fillStyle = color;
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    context.restore();
+// Background Color Settings
+function changeBackgroundTransparency() {
+    const backgroundRow = document.getElementById("background-color-row");
+    backgroundRow.style.visibility = backgroundRow.style.visibility === "hidden" ? "visible" : "hidden";
+    backgroundColorSetting.checked ? clearBackground() : updateToolbarSettings();
 }
-
-//////////////////////////////////////////////////////////////////////////
-
-function downloadCanvas(){
-    let downloadOption = document.getElementById("download-options").getValue;
-    console.log(downloadOption);
+// Clears both the Canvases
+function clearCanvas() {
+    paint = false;
+    drawingContext.clearRect(0, 0, drawingBoard.width, drawingBoard.height);
+    backgroundContext.clearRect(0, 0, drawingBoard.width, drawingBoard.height);
+    updateToolbarSettings();
 }
-
-function resize(){
-    // context.canvas.width = window.innerWidth;
-    // context.canvas.height = window.innerHeight;
-    context.canvas.width = 750;
-    context.canvas.height = 250;
+// Clears the Background
+function clearBackground() {
+    backgroundContext.clearRect(0, 0, drawingBoard.width, drawingBoard.height);
 }
-
-function reload(){
-    location.reload();
+// Resizes the Canvas
+function resize() {
+    drawingContext.canvas.width = 750;
+    drawingContext.canvas.height = 250;
+    backgroundContext.canvas.width = 750;
+    backgroundContext.canvas.height = 250;
+    updateToolbarSettings();
 }
-
-function getPosition(event){
+// Gets the position of the Cursor
+function getPosition(event) {
     const rect = drawingBoard.getBoundingClientRect();
     const scaleX = drawingBoard.width / rect.width;
     const scaleY = drawingBoard.height / rect.height;
     coords.x = (event.clientX - rect.left) * scaleX;
-    coords.y = (event.clientY - rect.top) * scaleY; 
+    coords.y = (event.clientY - rect.top) * scaleY;
 }
-function startPainting(event){
+// Gets the position of the Touch
+function getTouchPosition(event) {
+    const rect = drawingBoard.getBoundingClientRect();
+    const scaleX = drawingBoard.width / rect.width;
+    const scaleY = drawingBoard.height / rect.height;
+    coords.x = (event.touches[0].clientX - rect.left) * scaleX;
+    coords.y = (event.touches[0].clientY - rect.top) * scaleY;
+}
+// Starts Painting
+function startPainting(event) {
     paint = true;
     getPosition(event);
 }
-function stopPainting(){
-    paint = false;
-}
-function sketch(event){
-    if (!paint){
-        return;
-    }
-    else{
-        context.beginPath();
-        context.strokeStyle = strokeColor;
-        context.lineWidth = strokeWidth;
-        context.lineCap = "round";
-        context.moveTo(coords.x, coords.y);
-        getPosition(event);
-        context.lineTo(coords.x , coords.y);
-        context.stroke();
+function startTouchPainting(event) {
+    if (event.target === drawingBoard) {
+        event.preventDefault();
+        paint = true;
+        getTouchPosition(event);
     }
 }
-
+// Sketchs the Drawing
+function sketch(event) {
+    if (!paint) return;
+    drawingContext.beginPath();
+    drawingContext.strokeStyle = strokeColor;
+    drawingContext.lineWidth = strokeWidth;
+    drawingContext.lineCap = "round";
+    drawingContext.moveTo(coords.x, coords.y);
+    getPosition(event);
+    drawingContext.lineTo(coords.x, coords.y);
+    drawingContext.stroke();
+}
+function touchSketch(event) {
+    if (!paint) return;
+    if (event.target === drawingBoard) {
+        event.preventDefault();
+        drawingContext.beginPath();
+        drawingContext.strokeStyle = strokeColor;
+        drawingContext.lineWidth = strokeWidth;
+        drawingContext.lineCap = "round";
+        drawingContext.moveTo(coords.x, coords.y);
+        getTouchPosition(event);
+        drawingContext.lineTo(coords.x, coords.y);
+        drawingContext.stroke();
+    }
+}
+// Stops Painting
+function stopPainting() {paint = false;}
+// Saves the Canvas
+function save() {
+    let imageData;
+    if (!backgroundColorSetting.checked) {
+        imageData = drawingContext.getImageData(0, 0, drawingBoard.width, drawingBoard.height);
+        drawingContext.save();
+        drawingContext.fillStyle = backgroundColor;
+        drawingContext.globalCompositeOperation = "destination-over";
+        drawingContext.fillRect(0, 0, drawingBoard.width, drawingBoard.height);
+    }
+    const documentSelection = document.getElementById("download-options").value;
+    switch (documentSelection) {
+        case "png":
+        case "jpg":
+            saveImage(documentSelection);
+            break;
+        case "pdf":
+            savePDF();
+            break;
+        default:
+            console.error("Unsupported file format selected");
+    }
+    if (!backgroundColorSetting.checked) {
+        drawingContext.clearRect(0, 0, drawingBoard.width, drawingBoard.height);
+        drawingContext.putImageData(imageData, 0, 0);
+        drawingContext.restore();
+    }
+}
+function saveImage(format) {
+    const dataURL = drawingBoard.toDataURL(`image/${format}`);
+    const link = document.createElement("a");
+    link.href = dataURL;
+    link.download = `signature_${getTimestamp()}.${format}`;
+    link.click();
+}
+const { jsPDF } = window.jspdf;
+function savePDF() {
+    const imgData = drawingBoard.toDataURL("image/jpg", 1.0);
+    const pdf = new jsPDF();
+    const canvasWidth = drawingBoard.width;
+    const canvasHeight = drawingBoard.height;
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const ratio = Math.min(pageWidth / canvasWidth, pageHeight / canvasHeight);
+    const width = canvasWidth * ratio;
+    const height = canvasHeight * ratio;
+    const x = (pageWidth - width) / 2;
+    const y = (pageHeight - height) / 2;
+    pdf.addImage(imgData, 'JPG', x, y, width, height);
+    pdf.save(`signature_${getTimestamp()}.pdf`);
+}
+function getTimestamp() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    return `${year}${month}${day}_${hours}${minutes}${seconds}`;
+}
