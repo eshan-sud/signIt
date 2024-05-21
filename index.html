@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Mini-Project for creating your own virtual signature wherever and whenever at your own convienience" />
+    <meta name="description" content="Mini-Project for creating your own virtual or electronic signature wherever and whenever at your own convienience" />
     <title>Create Your E-Sign - Eshan Sud</title>
     <link rel="apple-touch-icon" sizes="180x180" href="./resources/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./resources/favicon/favicon-32x32.png">
@@ -32,110 +31,57 @@
     </style>
 </head>
 <body>
-    <nav class="navbar bg-info shadow-lg p-3 mb-5 justify-content-between">
-        <div class="bg-white p-2 rounded-5 bg-opacity-75 text-center"><a class="navbar-brand fw-bold" href="">E-Sign</a></div>
-        <div id="logged-out">
-            <div class="row">
-                <div class="dropdown col">
-                    <button type="button" class="btn btn-outline-success me-2 dropdown-toggle fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside"> Login </button>
-                    <form class="dropdown-menu dropdown-menu-end p-4 text-nowrap bg-body">
-                        <label class="text-dark pb-4 fw-bold text-decoration-underline "> Have An Account With Us? </label>
-                        <div class="mb-3">
-                            <label for="dropdown-login-email" class="form-label fw-medium"> Email Address: </label>
-                            <input type="email" class="form-control" id="dropdown-login-email" placeholder="email@example.com">
-                        </div>
-                        <div class="mb-3">
-                            <label for="dropdown-login-password" class="form-label fw-medium"> Password: </label>
-                            <input type="password" class="form-control" id="dropdown-login-password" placeholder="Password">
-                        </div>
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="dropdown-check">
-                                <label class="form-check-label fw-medium" for="dropdown-check"> Remember Me </label>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary" id="dropdown-sign-in"> Sign In </button>
-                            <button type="reset" class="btn btn-secondary"> Reset </button>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-auto divider"></div>
-                <div class="dropdown col">
-                    <button type="button" class="btn btn-outline-danger me-2 dropdown-toggle fw-bold" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside"> Sign Up </button>
-                    <form class="dropdown-menu dropdown-menu-end p-4 text-nowrap bg-body">
-                        <label class="text-dark pb-4 fw-bold text-decoration-underline"> Don't Have An Account With Us? </label>
-                        <div class="mb-3">
-                            <label for="dropdown-signup-email" class="form-label fw-medium"> Email Address: </label>
-                            <input type="email" class="form-control" id="dropdown-signup-email" placeholder="email@example.com">
-                        </div>
-                        <div class="mb-3">
-                            <label for="dropdown-signup-password" class="form-label fw-medium"> Password: </label>
-                            <input type="password" class="form-control" id="dropdown-signup-password" placeholder="Password">
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary" id="dropdown-sign-up"> Sign up </button>
-                            <button type="reset" class="btn btn-secondary"> Reset </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div id="logged-in" style="display: none;">
-            <button class="btn btn-outline-secondary" type="button">Logout</button>
-        </div>
-    </nav>
+    <nav class="navbar bg-danger shadow-lg p-3 mb-5 justify-content-center "><h1 class="fw-bold">Create Your Electronic Signature</h1></nav>
     <main class="container mt-5">
-        <div class="text-center">
-            <h1 class="fw-bold">Create your electronic signature</h1>
-            <hr>
-        </div>
-        <div id="toolbar-settings" class="row mt-4 ">
-            <div class="col bg-black p-3 rounded-5 bg-opacity-25 text-center m-md-2">
-                <h3> Stroke Settings </h3>
-                <table class="w-100 mb-4">
-                    <tr>
-                        <td><label for="stroke-color" class="fw-medium"> Stroke Colour: </label></td>
-                        <td><input id="stroke-color" class="form-control form-control-color" name="stroke-color" type="color"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="stroke-width" class="fw-medium"> Stroke Width: </label></td>
-                        <td><input id="stroke-width" class="form-control form-control-sm" name="stroke-width" type="number" value="5"></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col bg-black p-3 rounded-5 bg-opacity-25 text-center m-md-2">
-                <h3> Background Settings </h3>
-                <table class="w-100 mb-4">
-                    <tr>
-                        <td><label for="background-check" class="fw-medium"> Transparent: </label></td>
-                        <td><input id="background-check" class="form-check form-check-input" name="background-check" type="checkbox" checked></td>
-                    </tr>
-                    <tr id="background-color-row" style="visibility: hidden;">
-                        <td><label for="background-color" class="fw-medium"> Background Color: </label></td>
-                        <td><input id="background-color" class="form-control form-control-color" name="background-color" type="color" value="#ffffff"></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col bg-black p-3 rounded-5 bg-opacity-25 text-center m-md-2">
-                <h3> Download Settings </h3>
-                <select id="download-options" name="download-options" class="form-control-lg">
-                    <option value="png" selected> png </option>
-                    <option value="jpg"> jpg </option>
-                    <option value="pdf"> pdf </option>
-                </select>
+        <div id="toolbar-settings" class="w-100 bg-black rounded-5 bg-opacity-25 p-3">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-4 text-center m-mb-3 p-4">
+                    <h3> Stroke Settings </h3>
+                    <table class="w-100 mb-4">
+                        <tr>
+                            <td class="w-50"><label for="stroke-color" class="w-100 fw-medium"> Colour: </label></td>
+                            <td class="w-50"><input id="stroke-color" class="w-100 form-control form-control-color" name="stroke-color" type="color"></td>
+                        </tr>
+                        <tr>
+                            <td class="w-50"><label for="stroke-width" class="w-100 fw-medium"> Width: </label></td>
+                            <td class="w-50"><input style="height: 38px; padding: 6px;" id="stroke-width" class="w-100 text-center size form-control form-control-sm" name="stroke-width" type="number" value="5"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-4 col-md-4 text-center m-mb-3 p-4">
+                    <h3> Background Settings </h3>
+                    <table class="w-100 mb-4">
+                        <tr>
+                            <td class="w-50"><label for="background-check" class="w-100 fw-medium"> Transparent: </label></td>
+                            <td class="w-50"><input style="height: 38px; margin: 0px; padding: 6px" id="background-check" class="w-100 form-check form-check-input" name="background-check" type="checkbox" checked></td>
+                        </tr>
+                        <tr id="background-color-row" style="visibility: hidden;">
+                            <td class="w-50"><label for="background-color" class="w-100 fw-medium"> Colour: </label></td>
+                            <td class="w-50"><input id="background-color" class="w-100 form-control form-control-color" name="background-color" type="color" value="#ffffff"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-4 col-md-4 text-center m-mb-3 p-4">
+                    <h3> Download Settings </h3>
+                    <select title="Download Options" class="w-75 form-control-lg " id="download-options" name="download-options">
+                        <option value="png" selected> png </option>
+                        <option value="jpg"> jpg </option>
+                        <option value="pdf"> pdf </option>
+                    </select>
+                </div>
             </div>
         </div>
-            <div class="canvas-container mt-4">
-                <canvas id="background-board" class="m-auto p-3"></canvas>
-                <canvas id="drawing-board" class="m-auto p-3"></canvas>
-            </div>
-        <div class="text-center mt-4">
-            <button id="download-button" class="btn btn btn-success fw-bold" style="border: none; padding: none;" onclick="save()"> Download </button>
-            <button class="btn btn-danger fw-bold" onclick="clearCanvas()"> Clear </button>
+        <hr class="border-4 border-black">
+        <div class="canvas-container rounded-5 mt-4 mx-auto d-block shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+            <canvas id="background-board" class="m-auto rounded-5 p-3"></canvas>
+            <canvas id="drawing-board" class="m-auto rounded-5 p-3"></canvas>
+        </div>
+        <div class="text-center mt-2 pb-5">
+            <button id="download-button" class="btn btn-lg btn-success fw-bold" style="border: none; padding: none;" onclick="save()"> Download </button>
+            <button class="btn btn-lg btn-danger fw-bold" onclick="clearCanvas()"> Clear </button>
         </div>
     </main>
-    <footer class="container-fluid text-center mt-5 pb-3 bg-info">
+    <footer class="container-fluid text-center mt-5 pb-3 bg-danger text-black">
 		<h1 class="pt-3">Contact Me</h1>
         <div class="m-4"><hr class="text-black"></div>
 		<div class="container text-center">

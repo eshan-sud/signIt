@@ -28,10 +28,8 @@ function updateToolbarSettings() {
         clearBackground();
         return;
     }
-    backgroundContext.save();
     backgroundContext.fillStyle = backgroundColor;
     backgroundContext.fillRect(0, 0, drawingBoard.width, drawingBoard.height);
-    backgroundContext.restore();
 }
 // Background Color Settings
 function changeBackgroundTransparency() {
@@ -42,19 +40,13 @@ function changeBackgroundTransparency() {
 // Clears both the Canvases
 function clearCanvas() {
     paint = false;
-    drawingContext.save();
-    backgroundContext.save();
     drawingContext.clearRect(0, 0, drawingBoard.width, drawingBoard.height);
     backgroundContext.clearRect(0, 0, drawingBoard.width, drawingBoard.height);
-    drawingContext.restore();
-    backgroundContext.restore();
     updateToolbarSettings();
 }
 // Clears the Background
 function clearBackground() {
-    backgroundContext.save();
     backgroundContext.clearRect(0, 0, drawingBoard.width, drawingBoard.height);
-    backgroundContext.restore();
 }
 // Resizes the Canvas
 function resize() {
@@ -129,7 +121,6 @@ function save() {
         drawingContext.fillStyle = backgroundColor;
         drawingContext.globalCompositeOperation = "destination-over";
         drawingContext.fillRect(0, 0, drawingBoard.width, drawingBoard.height);
-        drawingContext.restore();
     }
     const documentSelection = document.getElementById("download-options").value;
     switch (documentSelection) {
@@ -144,7 +135,6 @@ function save() {
             console.error("Unsupported file format selected");
     }
     if (!backgroundColorSetting.checked) {
-        drawingContext.save();
         drawingContext.clearRect(0, 0, drawingBoard.width, drawingBoard.height);
         drawingContext.putImageData(imageData, 0, 0);
         drawingContext.restore();
