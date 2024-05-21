@@ -4,76 +4,74 @@ window.addEventListener("load", () => {
     document.addEventListener("mouseup", stopPainting);
     document.addEventListener("mousemove", sketch);
     window.addEventListener("resize", resize);
-    const toolBar = document.getElementById("toolbar-settings");
-    toolBar.addEventListener("change", updateToolbarSettings);
+    document.getElementById("toolbar-settings").addEventListener("change", updateToolbarSettings);
     document.getElementById("background-check").addEventListener("click", changeBackgroundTransparency);
-    document.getElementById("background-color").addEventListener("change", changeBackground);
 });
-
 // Drawing Board
 const drawingBoard = document.getElementById("drawing-board");
 const context = drawingBoard.getContext("2d");
-let strokeWidth = 0, strokeColor = "black";
-let coords = {x: 0, y: 0};
+let strokeWidth = 5, strokeColor = "black";
+let coords = { x: 0, y: 0 };
 let paint = false;
-
-// Update Toolbar
-function updateToolbarSettings(){
+// Update Toolbar Settings
+function updateToolbarSettings() {
     strokeWidth = document.getElementById("stroke-width").value;
     strokeColor = document.getElementById("stroke-color").value;
-}
-
-// Download Image
-function save(){
-    const pngDataURL = drawingBoard.toDataURL("image/png");
-    let downloadButton = document.getElementById("download-button");
-    downloadButton.href = pngDataURL;
-}
-
-// Background Color Settings
-function changeBackgroundTransparency(){
-    let backgroundRow = document.getElementById("background-color-row");
-    if (backgroundRow.style.display === "none"){
-        backgroundRow.style.display = "block";
-    } else {
-        backgroundRow.style.display = "none";
+    if (!document.getElementById("background-check").checked) {
+        let color = document.getElementById("background-color").value;
+        context.save();
+        context.fillStyle = color;
+        context.fillRect(0, 0, drawingBoard.width, drawingBoard.height);
+        context.restore();
     }
+    else {clearCanvas();}
 }
-
-function changeBackground(){
-    let color = document.getElementById("background-color").value;
-    context.fillStyle = color;
-    context.fillRect(0, 0, drawingBoard.width, drawingBoard.height);
+// Clears the Canvas
+function clearCanvas() {context.clearRect(0, 0, drawingBoard.width, drawingBoard.height);}
+// Saves the Canvas
+function save() {
+    const documentSelection = document.getElementById("download-options").value;
+    const selection = {
+        "png": "image/png",
+        "jpeg": "image/jpeg",
+        "jpg": "image/jpeg",
+        "pdf": "application/pdf"
+    };
+    const dataURL = drawingBoard.toDataURL(selection[documentSelection]);
+    let downloadButton = document.getElementById("download-button").querySelector("a");
+    downloadButton.href = dataURL;
+    downloadButton.download = "signature." + documentSelection;
 }
-
-function resize(){
-    drawingBoard.width = 750;
-    drawingBoard.height = 250;
+// Background Color Settings
+function changeBackgroundTransparency() {
+    const backgroundRow = document.getElementById("background-color-row");
+    backgroundRow.style.visibility = backgroundRow.style.visibility === "hidden" ? "visible" : "hidden";
+    updateToolbarSettings();
 }
-
-function reload(){
-    location.reload();
+// Resizes the Canvas
+function resize() {
+    context.canvas.width = 750;
+    context.canvas.height = 250;
+    updateToolbarSettings();
 }
-
-function getPosition(event){
+// Gets the position of the Cursor
+function getPosition(event) {
     const rect = drawingBoard.getBoundingClientRect();
     const scaleX = drawingBoard.width / rect.width;
     const scaleY = drawingBoard.height / rect.height;
     coords.x = (event.clientX - rect.left) * scaleX;
     coords.y = (event.clientY - rect.top) * scaleY;
 }
-function startPainting(event){
+// Starts Painting
+function startPainting(event) {
     paint = true;
-    getPosition(event); // Get initial position
-    sketch(event); // Start drawing from initial position
+    getPosition(event);
 }
-function stopPainting(){
-    paint = false;
-}
-function sketch(event){
-    if (!paint){
-        return;
-    }
+// Stops Painting
+function stopPainting() {paint = false;}
+// Sketchs the Drawing
+function sketch(event) {
+    if (!paint) return;
     context.beginPath();
     context.strokeStyle = strokeColor;
     context.lineWidth = strokeWidth;

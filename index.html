@@ -15,7 +15,7 @@
 </head>
 <body>
     <nav class="navbar bg-info shadow-lg p-3 mb-5 justify-content-between">
-        <div><a class="navbar-brand fw-bold" href="">E-Sign</a></div>
+        <div class="bg-white p-2 rounded-5 bg-opacity-75 text-center"><a class="navbar-brand fw-bold" href="">E-Sign</a></div>
         <div id="logged-out">
             <div class="row">
                 <div class="dropdown col">
@@ -23,12 +23,12 @@
                     <form class="dropdown-menu dropdown-menu-end p-4 text-nowrap bg-body">
                         <label class="text-dark pb-4 text-capitalize fw-bold">Have an account with us?</label>
                         <div class="mb-3">
-                            <label for="dropdown-form-email" class="form-label text-capitalize">Email address</label>
-                            <input type="email" class="form-control" id="dropdown-form-email" placeholder="email@example.com">
+                            <label for="dropdown-login-email" class="form-label text-capitalize">Email address</label>
+                            <input type="email" class="form-control" id="dropdown-login-email" placeholder="email@example.com">
                         </div>
                         <div class="mb-3">
-                            <label for="dropdown-form-password" class="form-label text-capitalize">Password</label>
-                            <input type="password" class="form-control" id="dropdown-form-password" placeholder="Password">
+                            <label for="dropdown-login-password" class="form-label text-capitalize">Password</label>
+                            <input type="password" class="form-control" id="dropdown-login-password" placeholder="Password">
                         </div>
                         <div class="mb-3">
                             <div class="form-check">
@@ -46,12 +46,12 @@
                     <form class="dropdown-menu dropdown-menu-end p-4 text-nowrap bg-body">
                         <label class="text-dark pb-4 text-capitalize fw-bold">Don't have an account with us?</label>
                         <div class="mb-3">
-                            <label class="form-label text-capitalize" for="dropdown-form-email">Email address</label>
-                            <input type="email" class="form-control" id="dropdown-form-email" placeholder="email@example.com">
+                            <label for="dropdown-signup-email" class="form-label text-capitalize">Email address</label>
+                            <input type="email" class="form-control" id="dropdown-signup-email" placeholder="email@example.com">
                         </div>
                         <div class="mb-3">
-                            <label for="dropdown-form-password" class="form-label text-capitalize">Password</label>
-                            <input type="password" class="form-control" id="dropdown-form-password" placeholder="Password">
+                            <label for="dropdown-signup-password" class="form-label text-capitalize">Password</label>
+                            <input type="password" class="form-control" id="dropdown-signup-password" placeholder="Password">
                         </div>
                         <button type="submit" class="btn btn-primary text-capitalize" id="dropdown-sign-up"> Sign up </button>
                         <button type="reset" class="btn btn-secondary text-capitalize"> Reset </button>
@@ -68,36 +68,36 @@
             <h1 class="fw-bold">Create your electronic signature</h1>
             <hr>
         </div>
-        <div class="row mt-4">
-            <div class="col-md-4">
-                <h3>Stroke Settings</h3>
-                <table>
+        <div id="toolbar-settings" class="row mt-4 ">
+            <div class="col bg-black p-3 rounded-5 bg-opacity-25 text-center m-md-2">
+                <h3 class="text-capitalize">stroke settings</h3>
+                <table class="w-100 mb-4">
                     <tr>
-                        <td><label for="stroke-color" class="text-capitalize">Stroke colour:</label></td>
+                        <td><label for="stroke-color" class="text-capitalize fw-medium">stroke colour:</label></td>
                         <td><input id="stroke-color" class="form-control form-control-color" name="stroke-color" type="color"></td>
                     </tr>
                     <tr>
-                        <td><label for="stroke-width" class="text-capitalize">Stroke width:</label></td>
-                        <td><input id="stroke-width" name="stroke-width" type="number" value="5"></td>
+                        <td><label for="stroke-width" class="text-capitalize fw-medium">stroke width:</label></td>
+                        <td><input id="stroke-width" class="form-control form-control-sm" name="stroke-width" type="number" value="5"></td>
                     </tr>
                 </table>
             </div>
-            <div class="col-md-4">
-                <h3>Background Settings</h3>
-                <table>
+            <div class="col bg-black p-3 rounded-5 bg-opacity-25 text-center m-md-2">
+                <h3 class="text-capitalize">background settings</h3>
+                <table class="w-100 mb-4">
                     <tr>
-                        <td><label for="background-check" class="text-capitalize">Transparent background:</label></td>
-                        <td><input id="background-check" class="form-check-input" name="background-check" type="checkbox" checked></td>
+                        <td><label for="background-check" class="text-capitalize fw-medium">transparent:</label></td>
+                        <td><input id="background-check" class="form-check form-check-input" name="background-check" type="checkbox" checked></td>
                     </tr>
-                    <tr id="background-color-row" style="display: none;">
-                        <td><label for="background-color" class="text-capitalize">Background color:</label></td>
+                    <tr id="background-color-row" style="visibility: hidden;">
+                        <td><label for="background-color" class="text-capitalize fw-medium">background color:</label></td>
                         <td><input id="background-color" class="form-control form-control-color" name="background-color" type="color"></td>
                     </tr>
                 </table>
             </div>
-            <div class="col-md-4">
-                <h3>Download Settings</h3>
-                <select name="download-options" class="form-select">
+            <div class="col bg-black p-3 rounded-5 bg-opacity-25 text-center m-md-2">
+                <h3 class="text-capitalize">download settings</h3>
+                <select id="download-options" name="download-options" class="form-control-lg">
                     <option value="png" selected>png</option>
                     <option value="jpeg">jpeg</option>
                     <option value="jpg">jpg</option>
@@ -107,8 +107,8 @@
         </div>
         <div class="mt-4"><canvas id="drawing-board"></canvas></div>
         <div class="text-center mt-4">
-            <button class="btn btn-primary" onclick="save()"><a href="#" class="text-dark text-capitalize link-underline fw-bold" download="signature">Download</a></button>
-            <button class="btn btn-danger fw-bold" onclick="reload()">Clear</button>
+            <button id="download-button" class="btn btn-primary" onclick="save()"><a href="#" class="text-dark text-capitalize link-underline fw-bold" download="Signature">Download</a></button>
+            <button class="btn btn-danger fw-bold" onclick="clearCanvas()">Clear</button>
         </div>
     </main>
     <footer class="container-fluid text-center mt-5 pb-3 bg-info">
