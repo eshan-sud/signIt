@@ -212,8 +212,8 @@ function setLightMode() {
         element.classList.add("back-white-dark");
     });
 
-    let whites = document.querySelectorAll(".color-white-dark");
-    whites.forEach((element) => {
+    let whites1 = document.querySelectorAll(".color-white-dark");
+    whites1.forEach((element) => {
         element.classList.remove("color-white-dark");
         element.classList.add("color-dark-white");
     });
