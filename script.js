@@ -174,3 +174,87 @@ function getTimestamp() {
     const seconds = String(now.getSeconds()).padStart(2, '0');
     return `${year}${month}${day}_${hours}${minutes}${seconds}`;
 }
+
+
+var settingDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Select Light/Dark Mode Default Setting
+    settingDark == true ? setDarkMode() : setLightMode();
+});
+
+// Change To Light Mode
+function setLightMode() {
+    if (settingDark == true) {
+        setDarkMode();
+        return;
+    }
+    // Changing Icon
+    var lightModeIcon = document.getElementById("light-mode-svg");
+    var darkModeIcon = document.getElementById("dark-mode-svg");
+    lightModeIcon.style.display = "flex";
+    darkModeIcon.style.display = "none";
+
+    // Changing Black to white and vice-vera
+    let blacks1 = document.querySelectorAll(".back-black-white");
+    let blacks2 = document.querySelectorAll(".back-white-black");
+    let blacks3 = document.querySelectorAll(".back-dark-white");
+    blacks1.forEach((element) => {
+        element.classList.remove("back-black-white");
+        element.classList.add("back-white-black");
+    });
+    blacks2.forEach((element) => {
+        element.classList.remove("back-white-black");
+        element.classList.add("back-black-white");
+    });
+    blacks3.forEach((element) => {
+        element.classList.remove("back-dark-white");
+        element.classList.add("back-white-dark");
+    });
+
+    let whites = document.querySelectorAll(".color-white-dark");
+    whites.forEach((element) => {
+        element.classList.remove("color-white-dark");
+        element.classList.add("color-dark-white");
+    });
+
+    settingDark = true;
+}
+// Change To Dark Mode
+function setDarkMode() {
+    if (settingDark == false) {
+        setLightMode();
+        return;
+    }
+
+    // Changing Icon
+    var lightModeIcon = document.getElementById("light-mode-svg");
+    var darkModeIcon = document.getElementById("dark-mode-svg");
+    lightModeIcon.style.display = "none";
+    darkModeIcon.style.display = "flex";
+
+    // Changing Black to white and vice-vera
+    let whites1 = document.querySelectorAll(".back-white-black");
+    let whites2 = document.querySelectorAll(".back-black-white");
+    let whites3 = document.querySelectorAll(".back-white-dark");
+    whites1.forEach((element) => {
+        element.classList.remove("back-white-black");
+        element.classList.add("back-black-white");
+    });
+    whites2.forEach((element) => {
+        element.classList.remove("back-black-white");
+        element.classList.add("back-white-black");
+    });
+    whites3.forEach((element) => {
+        element.classList.remove("back-white-dark");
+        element.classList.add("back-dark-white");
+    });
+
+    let blacks = document.querySelectorAll(".color-dark-white");
+    blacks.forEach((element) => {
+        element.classList.remove("color-dark-white");
+        element.classList.add("color-white-dark");
+    });
+
+    settingDark = false;
+}
