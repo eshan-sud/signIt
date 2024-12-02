@@ -1,4 +1,4 @@
-# virtual-signature-creator
+# SignIt
 
 A website to create virtual signatures on any device, giving ability to change the stroke colour, stroke width, background colour & download file types (between PNG, JPG& PDF) as well
 
