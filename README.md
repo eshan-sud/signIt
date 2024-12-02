@@ -2,7 +2,7 @@
 
 A website to create virtual signatures on any device, giving ability to change the stroke colour, stroke width, background colour & download file types (between PNG, JPG& PDF) as well
 
-Link : <a href="https://eshan-sud.github.io/virtual-signature-creator/" target="_blank">https://eshan-sud.github.io/virtual-signature-creator/</a>
+Link : <a href="https://eshan-sud.github.io/signIt/" target="_blank">https://eshan-sud.github.io/signIt//</a>
 
 Built using : HTML5, CSS3, Bootstrap, JavaScript
 
